@@ -6,7 +6,8 @@ const nounListLength = 50
 var adjectives = []
 
 var loadAdjectives = function () {
-  fs.readFile('.adj.txt', 'utf8', function (err, data) {
+  console.log('Loading adjectives...')
+  fs.readFile('./adj.txt', 'utf8', function (err, data) {
     if (err) throw err
     adjectives = data.split('\r\n')
     return err
