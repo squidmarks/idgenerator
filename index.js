@@ -1,13 +1,14 @@
 const got = require('got')
 const uuid = require('uuid/v4');
-var fs = require('fs')
+const path = require('path');
+const fs = require('fs')
 const nounListLength = 50
 
 var adjectives = []
 
 var loadAdjectives = function () {
   console.log('Loading adjectives...')
-  fs.readFile('./adj.txt', 'utf8', function (err, data) {
+  fs.readFile('adj.txt', 'utf8', function (err, data) {
     if (err) throw err
     adjectives = data.split('\r\n')
     return err
@@ -24,6 +25,7 @@ loadAdjectives();
 module.exports = {
   generateName: () => {
     got('https://my.api.mockaroo.com/projectnames.json?key=f4fa2230', { json: true }).then(response => {
+      console.log(response)
       let nounList = []
       response.forEach(element => {
         nounList.push(element.phonetic)
