@@ -21,24 +21,13 @@ const capitalize = (s) => {
 loadAdjectives();
 
 module.exports = {
-  generateName: (includeGenres) => {
+  generateName: () => {
     got('https://my.api.mockaroo.com/projectnames.json?key=f4fa2230', { json: true }).then(response => {
-      let wordList = includeGenres
       let nounList = []
-      wordList.forEach(element => {
-        if (element === 'Last names') nounList.push(element)
-        if (element === 'Female first names') nounList.push(element)
-        if (element === 'Male first names') nounList.push(element)
-        if (element === 'Races') nounList.push(element)
-        if (element === 'State names') nounList.push(element)
-        if (element === 'Movie genre') nounList.push(element.split('|')[0])
-        if (element === 'Foods') nounList.push(element.split(' ')[0])
-        if (element === 'Animals') nounList.push(element.split(' ')[0].replace(',', ''))
-        if (element === 'Car makes') nounList.push(element)
-        if (element === 'Car models') nounList.push(element)
-        if (element === 'Cities') nounList.push(element)
-        if (element === 'Countries') nounList.push(element)
-        if (element === 'Colors') nounList.push(element)
+      response.forEach(element => {
+        nounList.push(element.phonetic)
+        nounList.push(element.firstname)
+        nounList.push(element.color)
       })
 
       return `${capitalize(adjectives[Math.floor(Math.random() * (adjectives.length-1))])} ${capitalize(nounList[Math.random * (nounListLength-1)])}`
