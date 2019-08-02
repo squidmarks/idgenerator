@@ -8,7 +8,7 @@ var adjectives = []
 
 var loadAdjectives = function () {
   console.log('Loading adjectives...')
-  fs.readFile('node_modules//idgenerator/adj.txt', 'utf8', function (err, data) {
+  fs.readFile('adj.txt', 'utf8', function (err, data) {
     if (err) throw err
     adjectives = data.split('\r\n')
     return err
@@ -24,7 +24,7 @@ loadAdjectives();
 
 module.exports = {
   generateNodes: () => {
-    got('https://my.api.mockaroo.com/projectnames.json?key=f4fa2230', { json: true }).then(response => {
+    got('https://my.api.mockaroo.com/nodenames.json?key=f4fa2230', { json: true }).then(response => {
       let nounList = []
       response.forEach(element => {
         nounList.push(element.phonetic)
