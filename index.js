@@ -39,6 +39,7 @@ module.exports = {
       return nounList
     }).catch(error => {
       console.log(error.response.error)
+      return null
     })  
   },
 }
