@@ -25,6 +25,7 @@ loadAdjectives();
 module.exports = {
   generateNodes: () => {
     got('https://my.api.mockaroo.com/nodenames.json?key=f4fa2230', { json: true }).then(response => {
+      if (response.error) return null
       let nounList = []
       response.forEach(element => {
         nounList.push(element.phonetic)
