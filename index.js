@@ -1,6 +1,6 @@
 const got = require('got')
-const uuid = require('uuid/v4');
-const path = require('path');
+const uuid = require('uuid/v4')
+const path = require('path')
 const fs = require('fs')
 const nounListLength = 50
 
@@ -8,7 +8,7 @@ var adjectives = []
 
 var loadAdjectives = function () {
   console.log('Loading adjectives...')
-  fs.readFile('adj.txt', 'utf8', function (err, data) {
+  fs.readFile('node_modules//idgenerator/adj.txt', 'utf8', function (err, data) {
     if (err) throw err
     adjectives = data.split('\r\n')
     return err
@@ -23,23 +23,20 @@ const capitalize = (s) => {
 loadAdjectives();
 
 module.exports = {
-  generateName: () => {
+  generateNodes: () => {
     got('https://my.api.mockaroo.com/projectnames.json?key=f4fa2230', { json: true }).then(response => {
-      console.log(response.body)
       let nounList = []
       response.forEach(element => {
         nounList.push(element.phonetic)
         nounList.push(element.firstname)
         nounList.push(element.color)
       })
-
-      return `${capitalize(adjectives[Math.floor(Math.random() * (adjectives.length-1))])} ${capitalize(nounList[Math.random * (nounListLength-1)])}`
+      nounList.forEach(noun => {
+        noun =  `${capitalize(adjectives[Math.floor(Math.random() * (adjectives.length-1))])} ${noun}`
+      })
+      return nounList
     }).catch(error => {
       console.log(error.response)
     })  
   },
-  
-  generateKey: () =>{
-    return uuid();
-  }
 }
