@@ -1,8 +1,6 @@
 const got = require('got')
-const uuid = require('uuid/v4')
 const path = require('path')
 const fs = require('fs')
-const nounListLength = 50
 
 var adjectives = []
 
@@ -40,7 +38,7 @@ module.exports = {
       })
       return nounList
     }).catch(error => {
-      console.log(error.response)
+      console.log(error.response.error)
     })  
   },
 }
